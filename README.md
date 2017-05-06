@@ -11,7 +11,7 @@ Conjunto de Scripts para Web Scraping dos dados das estações metereológicas d
 python3 geraBase.py
 ```
 
-**Saída:** Arquivo JSON (estacoes.json) contendo dados de todas as estações metereológicas do INMET.
+**Saída:** Arquivo JSON ([estacoes.json](/estacoes.json)) contendo dados de todas as estações metereológicas do INMET.
 
 ## Script para captura dos dados metereológicos de cada estação
 **Script:** capturaDados.py
