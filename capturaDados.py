@@ -117,9 +117,6 @@ for cod in stations_id:
     # Cria uma sessao para persistencia de informacoes entre requests
     session = requests.Session()
     r = session.get(url).text
-
-    print(getImgNumber(r))
-    print(getImgNumber(r))    
     
     img_number = getImgNumber(r)[0]
     form["aleaValue"] = img_number
