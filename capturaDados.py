@@ -25,7 +25,14 @@ import os
 # Funcao responsavel por capturar o numero codificado do captive
 def getImgNumber(html):
     soup = bs4.BeautifulSoup(html, 'html.parser')
-    return (soup.img.get("src")).split("imgNum=", maxsplit=1)[1]
+    
+    hidden_tags = soup.find_all("input", type="hidden")
+
+    
+    return [(soup.img.get("src")).split("imgNum=", maxsplit=1)[1],
+            (str(hidden_tags[0]).split("value=", maxsplit=1)[1][1:-3]),
+            (str(hidden_tags[1]).split("value=", maxsplit=1)[1][1:-3]),
+            (str(hidden_tags[2]).split("value=", maxsplit=1)[1][1:-3])]
 
 # Funcao responsavel por retornar o numero do captive decodificado
 def decodeNumber(num):
@@ -111,8 +118,13 @@ for cod in stations_id:
     session = requests.Session()
     r = session.get(url).text
 
-    img_number = getImgNumber(r)
+    print(getImgNumber(r))
+    print(getImgNumber(r))    
+    
+    img_number = getImgNumber(r)[0]
     form["aleaValue"] = img_number
+    form["xaleaValue"] = getImgNumber(r)[2]
+    form["xID"] = getImgNumber(r)[3]
     form["aleaNum"] = decodeNumber(img_number)
 
     # Recebe o redirecionamento para a tabela de dados da estacao
